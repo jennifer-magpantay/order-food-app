@@ -73,8 +73,8 @@ export const Menu = ({ onListItemClick }: MenuProps) => {
     <>
       <Section
         title="Our Menu"
-        subtitle="Food that always make you fall in love"
-        description="Options available"
+        subtitle="Meals that always make you fall in love"
+        description="What we serve"
       >
         <div className="menu--tab">
           <ul className="tab--list">

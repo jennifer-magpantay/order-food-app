@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { Header } from "./components/UI/Header";
+import { Hero } from "./components/UI/Hero";
 import { Button } from "./components/UI/Button";
 import { Main } from "./components/UI/Main";
 import { Menu } from "./components/Menu/Menu";
@@ -15,9 +16,9 @@ import { calculateTotalPriceByItemAmount } from "./helpers/totalAmount";
  * TODO:
  * - find a way to not fetch the menu all the time
  * - maybe save it into storage?
- * - set event to cart button on header
- * - create Modal to open order list
- * - set counting items on cart header
+ * - add amount form to order item
+ * - set function to update order item amount when user add or remove item
+ * - set function to remoce item from list
  */
 
 export interface OrdersProps {
@@ -61,6 +62,7 @@ export const App = () => {
           onClick={handleModalDisplay}
         />
       </Header>
+      <Hero />
 
       <Main>
         <Menu onListItemClick={saveItemsList} />
