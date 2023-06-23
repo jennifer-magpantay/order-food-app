@@ -1,0 +1,55 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+@use "../functions" as *;
+@use "../responsive" as *;
+
+.hero {
+  width: 100%;
+  max-height: 25vh;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient($primary-color-bg, $white);
+  flex-wrap: wrap;
+
+  h1 {
+    width: 18ch;
+    margin-left: gap(2);
+
+    @include for-tablet-landscape-up {
+      margin-left: gap(8);
+    }
+    span {
+      color: $primary-color-dk;
+    }
+  }
+
+  .image {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: gap(2);
+    margin-right: gap(2);
+
+    @include for-tablet-landscape-up {
+      width: 50%;
+      height: 100%;
+      margin-top: unset;
+      margin-right: gap(8);
+    }
+    svg {
+      width: 60px;
+      height: 60px;
+      padding: gap(1);
+      border-radius: 50px;
+      background-color: $primary-color;
+
+      @include for-tablet-landscape-up {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
+}
