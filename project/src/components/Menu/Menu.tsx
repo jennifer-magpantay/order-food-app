@@ -64,6 +64,7 @@ export const Menu = ({ onListItemClick }: MenuProps) => {
       id: target.id,
       name: String(target.children[0].textContent),
       price: String(target.children[1].textContent),
+      amount: 1,
     };
     onListItemClick(item);
   };

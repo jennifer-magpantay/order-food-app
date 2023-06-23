@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { Header } from "./components/UI/Header";
 import { Button } from "./components/UI/Button";
@@ -9,6 +9,7 @@ import { Modal } from "./components/UI/Modal";
 
 import { ShoppingCartSimple, X } from "@phosphor-icons/react";
 import { calculateSubtotal } from "./helpers/subtotal";
+import { calculateTotalPriceByItemAmount } from "./helpers/totalAmount";
 
 /**
  * TODO:
@@ -23,6 +24,7 @@ export interface OrdersProps {
   id: string;
   name: string;
   price: string;
+  amount: number;
 }
 
 export interface OrdersListProps {
@@ -83,13 +85,31 @@ export const App = () => {
             <p>There are no orders to be displayed</p>
           ) : (
             <>
-              <ul className="orders--list">
-                {orders.map((order) => (
-                  <li key={order.name} className="orders--list-item">
-                    <span>{order.name}</span> <span>{order.price}</span>
-                  </li>
-                ))}
-              </ul>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Food</th>
+                    <th>Price</th>
+                    <th>Qt</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.map((order) => (
+                    <tr key={order.name}>
+                      <td>{order.name}</td>
+                      <td>{order.price}</td>
+                      <td>{order.amount}</td>
+                      <td>
+                        {calculateTotalPriceByItemAmount(
+                          order.price,
+                          order.amount
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </>
           )}
         </div>

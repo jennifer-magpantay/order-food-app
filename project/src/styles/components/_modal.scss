@@ -32,6 +32,28 @@
 
   &--body {
     margin-bottom: gap(2);
+    border-collapse: collapse;
+
+    table {
+      width: 100%;
+      text-align: left;
+
+      thead,
+      tbody {
+        width: 100%;
+      }
+
+      thead > tr > th {
+        color: $gray-700;
+        font-weight: bold;
+        letter-spacing: 1.2px;
+      }
+
+      th,
+      td {
+        padding: gap(1);
+      }
+    }
   }
 
   &--footer {
