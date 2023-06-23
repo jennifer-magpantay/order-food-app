@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Section } from "../UI/Section";
 import { Button } from "../UI/Button";
-import { render } from "react-dom";
 import { OrdersProps } from "../../App";
 import { generateRandomPrice } from "../../helpers/randomPrice";
 
@@ -9,7 +8,7 @@ interface DataProps {
   strMeal: string;
   strMealThumb?: string;
   idMeal: string;
-  price: number;
+  price: string;
 }
 
 interface DataPropsList {
@@ -60,10 +59,11 @@ export const Menu = ({ onListItemClick }: MenuProps) => {
   };
 
   const handleListItemClick = (e: React.MouseEvent) => {
-    const target = e.target as HTMLUListElement;
+    const target = e.currentTarget as HTMLUListElement;
     const item = {
       id: target.id,
-      name: target.innerText,
+      name: String(target.children[0].textContent),
+      price: String(target.children[1].textContent),
     };
     onListItemClick(item);
   };
