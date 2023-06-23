@@ -8,6 +8,7 @@ import { Footer } from "./components/UI/Footer";
 import { Modal } from "./components/UI/Modal";
 
 import { ShoppingCartSimple, X } from "@phosphor-icons/react";
+import { calculateSubtotal } from "./helpers/subtotal";
 
 /**
  * TODO:
@@ -21,6 +22,7 @@ import { ShoppingCartSimple, X } from "@phosphor-icons/react";
 export interface OrdersProps {
   id: string;
   name: string;
+  price: string;
 }
 
 export interface OrdersListProps {
@@ -38,6 +40,12 @@ export const App = () => {
   const handleModalDisplay = () => {
     setIsModalDisplayed(!isModalDisplayed);
   };
+
+  const handleCheckout = () => {
+    setIsModalDisplayed(!isModalDisplayed);
+    // do something else
+  };
+
   return (
     <>
       <Header>
@@ -58,37 +66,49 @@ export const App = () => {
       <Footer />
 
       <Modal isModalDisplayed={isModalDisplayed}>
-        <Button
-          id="close-modal"
-          type="button"
-          text="Close modal"
-          customClasses="icon"
-          icon={<X size={32} />}
-          onClick={handleModalDisplay}
-        />
-        <h3>Orders List</h3>
+        <div className="modal--header">
+          <h3>Orders List</h3>
+          <Button
+            id="close-modal"
+            type="button"
+            text="Close modal"
+            customClasses="icon"
+            icon={<X size={32} />}
+            onClick={handleModalDisplay}
+          />
+        </div>
 
-        {orders.length === 0 ? (
-          <p>There are no orders to be displayed</p>
-        ) : (
-          <>
-            <ul className="orders--list">
-              {orders.map((order) => (
-                <li key={order.id} className="orders--list-item">
-                  {order.name}
-                </li>
-              ))}
-            </ul>
-          </>
+        <div className="modal--body">
+          {orders.length === 0 ? (
+            <p>There are no orders to be displayed</p>
+          ) : (
+            <>
+              <ul className="orders--list">
+                {orders.map((order) => (
+                  <li key={order.name} className="orders--list-item">
+                    <span>{order.name}</span> <span>{order.price}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+
+        {orders.length !== 0 && (
+          <div className="modal--footer">
+            <p className="bold">
+              <span>Subtotal</span>
+              <span>{calculateSubtotal(orders)}</span>
+            </p>
+            <Button
+              id="checkout"
+              type="button"
+              text="Proceed to checkout"
+              customClasses="cta center"
+              onClick={handleCheckout}
+            />
+          </div>
         )}
-
-        <Button
-          id="checkout"
-          type="button"
-          text="Proceed to checkout"
-          customClasses="cta center"
-          onClick={handleModalDisplay}
-        />
       </Modal>
     </>
   );
