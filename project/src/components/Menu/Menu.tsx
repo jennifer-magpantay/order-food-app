@@ -3,11 +3,13 @@ import { Section } from "../UI/Section";
 import { Button } from "../UI/Button";
 import { render } from "react-dom";
 import { OrdersProps } from "../../App";
+import { generateRandomPrice } from "../../helpers/randomPrice";
 
 interface DataProps {
   strMeal: string;
   strMealThumb?: string;
   idMeal: string;
+  price: number;
 }
 
 interface DataPropsList {
@@ -19,16 +21,16 @@ interface MenuProps {
 }
 
 export const Menu = ({ onListItemClick }: MenuProps) => {
-  const [menu, setMenu] = useState<DataPropsList>();
+  const [menu, setMenu] = useState<DataProps[]>();
 
   const handleMenuTab = (e: React.MouseEvent) => {
     const target = e.target as HTMLButtonElement;
     fetchData(target.id);
   };
 
-  const sliceMenuList = (menu: DataPropsList) => {
-    const shuffled = [...menu.meals].sort(() => 0.5 - Math.random());
-    return { meals: shuffled.slice(0, 10) };
+  const sliceMenuList = (menu: DataProps[]) => {
+    const shuffled = [...menu].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 10);
   };
 
   const fetchData = async (id: string) => {
@@ -37,23 +39,32 @@ export const Menu = ({ onListItemClick }: MenuProps) => {
     const result: DataPropsList = await fetch(URL).then((response) =>
       response.json()
     );
+    const data = result.meals;
 
-    if (result.meals.length > 10) {
-      const menuSliced = sliceMenuList(result);
+    const resultWithPrice = data.map((meal) => {
+      const newList = {
+        idMeal: meal.idMeal,
+        strMeal: meal.strMeal,
+        strMealThumb: meal.strMealThumb,
+        price: generateRandomPrice(1, 20),
+      };
+      return newList;
+    });
+
+    if (resultWithPrice.length > 10) {
+      const menuSliced = sliceMenuList(resultWithPrice);
       setMenu(menuSliced);
     } else {
-      setMenu(result);
+      setMenu(resultWithPrice);
     }
   };
 
   const handleListItemClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLUListElement;
-
     const item = {
       id: target.id,
       name: target.innerText,
     };
-
     onListItemClick(item);
   };
 
@@ -65,8 +76,8 @@ export const Menu = ({ onListItemClick }: MenuProps) => {
         description="Options available"
       >
         <div className="menu--tab">
-          <ul>
-            <li>
+          <ul className="tab--list">
+            <li className="tab--list-item">
               <Button
                 customClasses="tab"
                 id="Breakfast"
@@ -75,7 +86,7 @@ export const Menu = ({ onListItemClick }: MenuProps) => {
                 onClick={(e) => handleMenuTab(e)}
               />
             </li>
-            <li>
+            <li className="tab--list-item">
               <Button
                 customClasses="tab"
                 id="Miscellaneous"
@@ -84,7 +95,7 @@ export const Menu = ({ onListItemClick }: MenuProps) => {
                 onClick={(e) => handleMenuTab(e)}
               />
             </li>
-            <li>
+            <li className="tab--list-item">
               <Button
                 customClasses="tab"
                 id="Vegan"
@@ -93,7 +104,7 @@ export const Menu = ({ onListItemClick }: MenuProps) => {
                 onClick={(e) => handleMenuTab(e)}
               />
             </li>
-            <li>
+            <li className="tab--list-item">
               <Button
                 customClasses="tab"
                 id="Dessert"
@@ -106,15 +117,16 @@ export const Menu = ({ onListItemClick }: MenuProps) => {
         </div>
 
         {menu && (
-          <div className="menu--tab-content">
-            <ul>
-              {menu.meals.map((item) => (
+          <div className="menu">
+            <ul className="menu--list">
+              {menu.map((item) => (
                 <li
                   key={item.idMeal}
+                  className="menu--list-item"
                   id={item.idMeal}
                   onClick={(e) => handleListItemClick(e)}
                 >
-                  {item.strMeal}
+                  <span>{item.strMeal}</span> <span>{item.price}</span>
                 </li>
               ))}
             </ul>
