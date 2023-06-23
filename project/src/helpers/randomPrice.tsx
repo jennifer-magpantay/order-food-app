@@ -4,7 +4,7 @@ export const generateRandomPrice = (min: number, max: number) => {
   return formatPrice(Number(price));
 };
 
-const formatPrice = (price: number) => {
+export const formatPrice = (price: number) => {
   return new Intl.NumberFormat("it-IT", {
     style: "currency",
     currency: "EUR",
