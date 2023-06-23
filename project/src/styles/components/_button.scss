@@ -1,0 +1,107 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+@use "../functions" as *;
+@use "../responsive" as *;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: toRem(8) toRem(24);
+  border: 02px solid transparent;
+  border-radius: $border-radius;
+  font-weight: $medium;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.cta {
+    background-color: $primary-color-dk;
+    border-radius: 50px;
+    color: $white;
+    font-weight: $medium;
+    letter-spacing: 1px;
+
+    &:hover,
+    &:focus {
+      outline-color: $primary-color-dk;
+    }
+
+    &.cart {
+      svg {
+        margin-left: gap(1);
+      }
+      &::after {
+        //content: "1";
+        content: attr(data-count);
+        width: 20px;
+        aspect-ratio: 1 / 1;
+        margin-left: gap(1);
+        background-color: $secondary-color;
+        border-radius: 50px;
+        color: $black;
+        font-size: toRem(14);
+        font-weight: $medium;
+      }
+    }
+  }
+
+  &.tab {
+    background-color: transparent;
+    border-radius: 50px;
+    color: $gray-700;
+    text-transform: capitalize;
+
+    &:hover,
+    &:focus {
+      background-color: $primary-color-dk;
+      color: $white;
+    }
+  }
+
+  &.icon {
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    //border: 02px solid transparent;
+    border-radius: 50px;
+
+    &:hover,
+    &:focus {
+      border-color: $gray-800;
+    }
+
+    svg {
+      width: 100%;
+    }
+  }
+
+  &.outline {
+    background-color: transparent;
+    border-color: $primary-color;
+    border-radius: 50px;
+    color: $primary-color;
+
+    &:hover,
+    &:focus {
+      outline-color: $primary-color;
+    }
+  }
+
+  &.align-right {
+    margin-left: auto;
+  }
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
+}

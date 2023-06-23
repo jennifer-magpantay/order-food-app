@@ -1,0 +1,26 @@
+@use "./mixins" as *;
+@use "./functions" as *;
+@use "./variables" as *;
+@use "./responsive" as *;
+
+h1 {
+  font-size: toRem(31.25);
+
+  @include for-tablet-landscape-up {
+    font-size: toRem(39.06);
+  }
+}
+
+h2 {
+  font-size: toRem(20);
+  @include for-tablet-landscape-up {
+    font-size: toRem(25);
+  }
+}
+
+h3 {
+  font-size: toRem(16);
+  @include for-tablet-landscape-up {
+    font-size: toRem(20);
+  }
+}

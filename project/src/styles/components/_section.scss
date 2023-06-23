@@ -1,0 +1,31 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+@use "../functions" as *;
+@use "../responsive" as *;
+
+.section {
+  width: 100%;
+  max-width: layoutColumn(8);
+  margin: gap(2) auto;
+
+  &--title,
+  &--subtitle,
+  &--description {
+    text-align: center;
+  }
+
+  &--title {
+    color: $primary-color-dk;
+  }
+
+  &--subtitle {
+    margin-top: gap(1);
+    color: $gray-800;
+  }
+
+  &--description {
+    margin-top: gap(2);
+    color: $black;
+    text-align: center;
+  }
+}

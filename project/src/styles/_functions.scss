@@ -1,0 +1,14 @@
+@function toRem($value) {
+  $remValue: calc($value / 16) + rem;
+  @return $remValue;
+}
+
+@function gap($value) {
+  $gapValue: calc($value * 8) + px;
+  @return $gapValue;
+}
+
+@function layoutColumn($value) {
+  $widthValue: calc(100% / 12 * $value);
+  @return $widthValue;
+}

@@ -1,0 +1,15 @@
+@mixin ellipsis {
+  //in order to make ellipsis works with %, you must specify the element display as inline-block
+  width: 100%;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin text-center {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
