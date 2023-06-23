@@ -1,0 +1,23 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+@use "../functions" as *;
+@use "../responsive" as *;
+
+.menu {
+  width: 100%;
+
+  &--list {
+    width: 100%;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: gap(1);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

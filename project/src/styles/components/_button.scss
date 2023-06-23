@@ -50,6 +50,10 @@
         font-weight: $medium;
       }
     }
+
+    &.center {
+      margin: gap(1) auto;
+    }
   }
 
   &.tab {
