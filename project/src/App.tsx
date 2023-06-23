@@ -5,8 +5,9 @@ import { Button } from "./components/UI/Button";
 import { Main } from "./components/UI/Main";
 import { Menu } from "./components/Menu/Menu";
 import { Footer } from "./components/UI/Footer";
+import { Modal } from "./components/UI/Modal";
 
-import { ShoppingCartSimple } from "@phosphor-icons/react";
+import { ShoppingCartSimple, X } from "@phosphor-icons/react";
 
 /**
  * TODO:
@@ -28,9 +29,14 @@ export interface OrdersListProps {
 
 export const App = () => {
   const [orders, setOrders] = useState<OrdersProps[]>([]);
+  const [isModalDisplayed, setIsModalDisplayed] = useState(false);
 
   const saveItemsList = (orderList: OrdersProps): void => {
     setOrders((prevState) => [...prevState, orderList]);
+  };
+
+  const handleModalDisplay = () => {
+    setIsModalDisplayed(!isModalDisplayed);
   };
   return (
     <>
@@ -42,6 +48,7 @@ export const App = () => {
           text="Cart"
           icon={<ShoppingCartSimple size={18} weight="bold" />}
           dataCount={orders.length}
+          onClick={handleModalDisplay}
         />
       </Header>
 
@@ -49,6 +56,40 @@ export const App = () => {
         <Menu onListItemClick={saveItemsList} />
       </Main>
       <Footer />
+
+      <Modal isModalDisplayed={isModalDisplayed}>
+        <Button
+          id="close-modal"
+          type="button"
+          text="Close modal"
+          customClasses="icon"
+          icon={<X size={32} />}
+          onClick={handleModalDisplay}
+        />
+        <h3>Orders List</h3>
+
+        {orders.length === 0 ? (
+          <p>There are no orders to be displayed</p>
+        ) : (
+          <>
+            <ul className="orders--list">
+              {orders.map((order) => (
+                <li key={order.id} className="orders--list-item">
+                  {order.name}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        <Button
+          id="checkout"
+          type="button"
+          text="Proceed to checkout"
+          customClasses="cta center"
+          onClick={handleModalDisplay}
+        />
+      </Modal>
     </>
   );
 };

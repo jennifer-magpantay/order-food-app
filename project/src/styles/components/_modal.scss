@@ -1,0 +1,45 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+@use "../functions" as *;
+@use "../responsive" as *;
+
+.modal--overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal {
+  width: 80%;
+  max-width: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: gap(2);
+  background-color: $white;
+  border-radius: $border-radius;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+
+  .icon {
+    position: absolute;
+    top: gap(1);
+    right: gap(1);
+
+    &.hover,
+    &:focus {
+      cursor: pointer;
+    }
+  }
+
+  h3 {
+    margin-bottom: gap(2);
+  }
+
+  .orders--list {
+    &-item {
+      margin-bottom: gap(0.5);
+    }
+  }
+}
