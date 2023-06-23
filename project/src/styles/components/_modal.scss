@@ -12,7 +12,7 @@
 
 .modal {
   width: 80%;
-  max-width: 300px;
+  max-width: 500px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -22,24 +22,44 @@
   transform: translate(-50%, -50%);
   z-index: 1000;
 
-  .icon {
-    position: absolute;
-    top: gap(1);
-    right: gap(1);
+  &--header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: gap(2);
+  }
 
-    &.hover,
-    &:focus {
-      cursor: pointer;
+  &--body {
+    margin-bottom: gap(2);
+  }
+
+  &--footer {
+    padding-top: gap(2);
+  }
+
+  .orders--list {
+    width: 100%;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: gap(0.5);
     }
   }
 
   h3 {
-    margin-bottom: gap(2);
+    letter-spacing: 0.5px;
   }
 
-  .orders--list {
-    &-item {
-      margin-bottom: gap(0.5);
-    }
+  .bold {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $gray-700;
+    font-weight: bold;
+    letter-spacing: 1.2px;
   }
 }

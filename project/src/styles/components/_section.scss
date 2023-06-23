@@ -5,8 +5,15 @@
 
 .section {
   width: 100%;
-  max-width: layoutColumn(5);
   margin: gap(2) auto;
+
+  @include for-tablet-portrait-up {
+    max-width: layoutColumn(8);
+  }
+
+  @include for-tablet-landscape-up {
+    max-width: layoutColumn(6);
+  }
 
   &--title,
   &--subtitle,

@@ -54,17 +54,4 @@ body {
   position: absolute;
 }
 
-.menu--tab {
-  width: 100%;
-  display: block;
-  margin: gap(2) auto;
 
-  ul {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: gap(1);
-    list-style: none;
-  }
-}

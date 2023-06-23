@@ -20,4 +20,19 @@
       }
     }
   }
+
+  &--tab {
+    width: 100%;
+    display: block;
+    margin: gap(2) auto;
+
+    .tab--list {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: gap(1);
+      flex-wrap: wrap;
+      list-style: none;
+    }
+  }
 }
