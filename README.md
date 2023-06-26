@@ -1,6 +1,6 @@
 # order-food-app
 
-An order food app where user could check a menu by category, add items to a cart, check what have been ordered with a list, amount and subtotal of the order.
+An order food app where user could check a menu by category, add items to a cart, check what have been ordered within a list which includes the itam description, amount and subtotal of the order.
 
 ## Technologies
 
@@ -8,7 +8,7 @@ An order food app where user could check a menu by category, add items to a cart
 
 ## Goals
 
-The main goals are practice concepts of state management, dynamic display of UI based on states, reusability amoung components and functions.
+The main goals are practice concepts of state management, sharing data, context, dynamic display of UI based on states, reusability amoung components and functions.
 
 ## Status
 
