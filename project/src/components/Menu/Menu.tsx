@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../../store/cartContext";
+
 import { Section } from "../UI/Section";
 import { Button } from "../UI/Button";
-import { OrdersProps } from "../../App";
+import { List } from "../List/List";
+import { CardItem } from "../Card/CardItem";
+import { ListItem } from "../List/ListItem";
+
 import { generateRandomPrice } from "../../helpers/randomPrice";
 
-interface DataProps {
+export interface DataProps {
   strMeal: string;
   strMealThumb?: string;
   idMeal: string;
@@ -15,12 +20,32 @@ interface DataPropsList {
   meals: DataProps[];
 }
 
-interface MenuProps {
-  onListItemClick: (value: OrdersProps) => void;
-}
+// interface MenuProps {
+//   onListItemClick: (value: OrdersProps) => void;
+// }
 
-export const Menu = ({ onListItemClick }: MenuProps) => {
-  const [menu, setMenu] = useState<DataProps[]>();
+const menuCategories = [
+  {
+    id: "Breakfast",
+    text: "Breakfast",
+  },
+  {
+    id: "Miscellaneous",
+    text: "Lunch",
+  },
+  {
+    id: "Vegan",
+    text: "Vegan",
+  },
+  {
+    id: "Dessert",
+    text: "Desserts",
+  },
+];
+
+export const Menu = () => {
+  const context = useContext(CartContext);
+  const { menu, loadMenu } = context;
 
   const handleMenuTab = (e: React.MouseEvent) => {
     const target = e.target as HTMLButtonElement;
@@ -52,21 +77,10 @@ export const Menu = ({ onListItemClick }: MenuProps) => {
 
     if (resultWithPrice.length > 10) {
       const menuSliced = sliceMenuList(resultWithPrice);
-      setMenu(menuSliced);
+      loadMenu(menuSliced);
     } else {
-      setMenu(resultWithPrice);
+      loadMenu(resultWithPrice);
     }
-  };
-
-  const handleListItemClick = (e: React.MouseEvent) => {
-    const target = e.currentTarget as HTMLUListElement;
-    const item = {
-      id: target.id,
-      name: String(target.children[0].textContent),
-      price: String(target.children[1].textContent),
-      amount: 1,
-    };
-    onListItemClick(item);
   };
 
   return (
@@ -76,63 +90,39 @@ export const Menu = ({ onListItemClick }: MenuProps) => {
         subtitle="Meals that always make you fall in love"
         description="What we serve"
       >
-        <div className="menu--tab">
-          <ul className="tab--list">
-            <li className="tab--list-item">
+        <List
+          list={menuCategories}
+          error="No menu available. Please, try to load the paga again"
+          customClass="list--tab"
+        >
+          {menuCategories?.map((item) => (
+            <ListItem key={item.id} id={item.id} customClass="list--tab-item">
               <Button
                 customClasses="tab"
-                id="Breakfast"
+                id={item.id}
                 type="button"
-                text="Breakfast"
+                text={item.text}
                 onClick={(e) => handleMenuTab(e)}
               />
-            </li>
-            <li className="tab--list-item">
-              <Button
-                customClasses="tab"
-                id="Miscellaneous"
-                type="button"
-                text="Lunch"
-                onClick={(e) => handleMenuTab(e)}
-              />
-            </li>
-            <li className="tab--list-item">
-              <Button
-                customClasses="tab"
-                id="Vegan"
-                type="button"
-                text="Vegan"
-                onClick={(e) => handleMenuTab(e)}
-              />
-            </li>
-            <li className="tab--list-item">
-              <Button
-                customClasses="tab"
-                id="Dessert"
-                type="button"
-                text="desserts"
-                onClick={(e) => handleMenuTab(e)}
-              />
-            </li>
-          </ul>
-        </div>
+            </ListItem>
+          ))}
+        </List>
 
-        {menu && (
-          <div className="menu">
-            <ul className="menu--list">
-              {menu.map((item) => (
-                <li
-                  key={item.idMeal}
-                  className="menu--list-item"
-                  id={item.idMeal}
-                  onClick={(e) => handleListItemClick(e)}
-                >
-                  <span>{item.strMeal}</span> <span>{item.price}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <List list={menu} customClass="list--menu">
+          {menu?.map((item) => (
+            <ListItem
+              key={item.idMeal}
+              id={item.idMeal}
+              customClass="list--menu-item"
+            >
+              <CardItem
+                id={item.idMeal}
+                description={item.strMeal}
+                price={item.price}
+              />
+            </ListItem>
+          ))}
+        </List>
       </Section>
     </>
   );
