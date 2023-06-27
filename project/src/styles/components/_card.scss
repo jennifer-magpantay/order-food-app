@@ -1,0 +1,28 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+@use "../functions" as *;
+@use "../responsive" as *;
+
+.card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: gap(3);
+
+  &--main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include for-small-desktop-up {
+      width: 70%;
+    }
+  }
+
+  &--aside {
+    @include for-small-desktop-up {
+      width: 30%;
+    }
+  }
+}

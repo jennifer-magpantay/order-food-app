@@ -8,11 +8,11 @@
   margin: gap(2) auto;
 
   @include for-tablet-portrait-up {
-    max-width: layoutColumn(8);
+    max-width: layoutColumn(9);
   }
 
   @include for-tablet-landscape-up {
-    max-width: layoutColumn(6);
+    max-width: layoutColumn(7);
   }
 
   &--title,

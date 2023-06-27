@@ -10,8 +10,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient($primary-color-bg, $white);
   flex-wrap: wrap;
+  padding: gap(4) 0;
+  background: linear-gradient($primary-color-bg, $white);
 
   h1 {
     width: 18ch;
@@ -26,29 +27,24 @@
   }
 
   .image {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: gap(2);
-    margin-right: gap(2);
+    display: none;
 
     @include for-tablet-landscape-up {
       width: 50%;
       height: 100%;
-      margin-top: unset;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
       margin-right: gap(8);
     }
-    svg {
-      width: 60px;
-      height: 60px;
-      padding: gap(1);
-      border-radius: 50px;
-      background-color: $primary-color;
 
+    svg {
       @include for-tablet-landscape-up {
         width: 80px;
         height: 80px;
+        padding: gap(1);
+        border-radius: 50px;
+        background-color: $primary-color;
       }
     }
   }

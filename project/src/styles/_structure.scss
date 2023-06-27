@@ -10,17 +10,19 @@ body,
 }
 
 body {
+  background-color: $white;
+  color: $text;
   font-family: "Poppins", sans-serif;
   font-size: toRem(14);
-  color: $text;
-  scroll-behavior: smooth;
   line-height: 1.4;
+  scroll-behavior: smooth;
 
   @include for-tablet-landscape-up {
     font-size: toRem(16);
   }
 
   #root {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
@@ -53,5 +55,3 @@ body {
   padding: 0;
   position: absolute;
 }
-
-

@@ -1,0 +1,39 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+@use "../functions" as *;
+@use "../responsive" as *;
+
+form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: gap(2);
+
+  .amount--container {
+    display: flex;
+    align-items: center;
+    gap: gap(1);
+
+    input {
+      width: 5ch;
+      padding: gap(1) gap(2);
+      border: 01px solid $gray-100;
+      border-radius: 4px;
+      text-align: center;
+    }
+  }
+}
+
+// remove arrows from input
+// For chrome, Safari, Edge, Opera :
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+// For firefox :
+input[type="number"] {
+  -moz-appearance: textfield;
+}
