@@ -1,17 +1,18 @@
-import { createContext, useState } from "react";
-import { DataProps } from "../components/Menu/Menu";
-import { OrdersProps } from "../App";
+import { createContext, useEffect, useState } from "react";
+import { DataProps, MenuProps, OrdersProps } from "../interface/interface";
 
 // set Context
 interface OrdersContextProps {
-  menu: DataProps[] | undefined;
+  menu: MenuProps[] | undefined;
   orders: OrdersProps[];
   subtotal: number;
   total: number;
   isModalDisplayed: boolean;
   addItem: (item: OrdersProps) => void;
   removeItem: (id: string) => void;
-  loadMenu: (data: DataProps[]) => void;
+  manageAmount: (id: string, itemId: string) => void;
+  setAmount: (amount: number, itemId: string) => void;
+  loadMenu: (data: MenuProps[]) => void;
   modalDisplay: () => void;
 }
 
@@ -24,6 +25,8 @@ const defaultValues: OrdersContextProps = {
   addItem: (item) => [],
   removeItem: (id) => [],
   loadMenu: (data) => [],
+  manageAmount: (id, itemId) => [],
+  setAmount: (amount, itemId) => [],
   modalDisplay: () => "",
 };
 
@@ -36,12 +39,12 @@ interface OrdersProviderProps {
 
 // create a Provider
 export const OrdersProvider = ({ children }: OrdersProviderProps) => {
-  const [menu, setMenu] = useState<DataProps[]>();
+  const [menu, setMenu] = useState<MenuProps[]>([]);
   const [orders, setOrders] = useState<OrdersProps[]>([]);
   const [isModalDisplayed, setIsModalDisplayed] = useState(false);
 
   // set functions before declare it as provoder values
-  const loadMenu = (data: DataProps[]) => {
+  const loadMenu = (data: MenuProps[]) => {
     setMenu(data);
   };
 
@@ -54,7 +57,39 @@ export const OrdersProvider = ({ children }: OrdersProviderProps) => {
   };
 
   const removeItemFromCart = (id: string) => {
-    return id;
+    const filteredOrders = orders.filter((order) => order.id !== id);
+    setOrders(filteredOrders);
+  };
+
+  const manageItemAmount = (id: string, itemId: string) => {
+    const updatedMenu = menu.map((order) => {
+      if (order.id === itemId) {
+        return {
+          ...order,
+          amount:
+            id === "increase"
+              ? order.amount + 1
+              : order.amount === 0
+              ? 0
+              : order.amount - 1,
+        };
+      }
+      return order;
+    });
+    setMenu(updatedMenu);
+  };
+
+  const setAmount = (amount: number, itemId: string) => {
+    const updatedMenu = menu.map((order) => {
+      if (order.id === itemId) {
+        return {
+          ...order,
+          amount: amount,
+        };
+      }
+      return order;
+    });
+    setMenu(updatedMenu);
   };
 
   // set the values as obj to be shared amoung the app components
@@ -66,6 +101,8 @@ export const OrdersProvider = ({ children }: OrdersProviderProps) => {
     addItem: addItemToCart,
     removeItem: removeItemFromCart,
     loadMenu: loadMenu,
+    manageAmount: manageItemAmount,
+    setAmount: setAmount,
     isModalDisplayed: isModalDisplayed,
     modalDisplay: modalDisplay,
   };
