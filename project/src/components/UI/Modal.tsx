@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import { useContext } from "react";
-import { CartContext } from "../../store/cartContext";
+import { OrdersContext } from "../../store/ordersContext";
 import { calculateSubtotal } from "../../helpers/subtotal";
 
 import { Button } from "./Button";
@@ -14,7 +14,7 @@ interface ModalProps {
 }
 
 export const Modal = ({ isModalDisplayed, title, children }: ModalProps) => {
-  const context = useContext(CartContext);
+  const context = useContext(OrdersContext);
   const { modalDisplay, orders } = context;
 
   const modalDiv = document.querySelector("#modal");
@@ -45,10 +45,6 @@ export const Modal = ({ isModalDisplayed, title, children }: ModalProps) => {
       <div className="modal--body">{children}</div>
       {orders.length !== 0 && (
         <div className="modal--footer">
-          <p className="bold">
-            <span>Total</span>
-            <span>{calculateSubtotal(orders)}</span>
-          </p>
           <Button
             id="checkout"
             type="button"
