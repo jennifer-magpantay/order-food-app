@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CartContext } from "../../store/cartContext";
+import { OrdersContext } from "../../store/ordersContext";
 
 import { Logo } from "./Logo";
 import { Button } from "./Button";
@@ -7,7 +7,7 @@ import { Button } from "./Button";
 import { ShoppingCartSimple } from "@phosphor-icons/react";
 
 export const Header = () => {
-  const context = useContext(CartContext);
+  const context = useContext(OrdersContext);
   const { orders, modalDisplay } = context;
 
   const handleModalDisplay = () => {

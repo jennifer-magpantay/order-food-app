@@ -3,7 +3,7 @@ import { DataProps } from "../components/Menu/Menu";
 import { OrdersProps } from "../App";
 
 // set Context
-interface CartContextProps {
+interface OrdersContextProps {
   menu: DataProps[] | undefined;
   orders: OrdersProps[];
   subtotal: number;
@@ -15,7 +15,7 @@ interface CartContextProps {
   modalDisplay: () => void;
 }
 
-const defaultValues: CartContextProps = {
+const defaultValues: OrdersContextProps = {
   menu: [],
   orders: [],
   subtotal: 0,
@@ -27,28 +27,20 @@ const defaultValues: CartContextProps = {
   modalDisplay: () => "",
 };
 
-export const CartContext = createContext(defaultValues);
+export const OrdersContext = createContext(defaultValues);
 
 // Set Provider
-interface CartProviderProps {
+interface OrdersProviderProps {
   children: React.ReactNode;
 }
 
 // create a Provider
-export const CartProvider = ({ children }: CartProviderProps) => {
+export const OrdersProvider = ({ children }: OrdersProviderProps) => {
   const [menu, setMenu] = useState<DataProps[]>();
   const [orders, setOrders] = useState<OrdersProps[]>([]);
   const [isModalDisplayed, setIsModalDisplayed] = useState(false);
 
   // set functions before declare it as provoder values
-  const addItemToCart = (item: OrdersProps) => {
-    setOrders((prevState) => [...prevState, item]);
-  };
-
-  const removeItemFromCart = (id: string) => {
-    return id;
-  };
-
   const loadMenu = (data: DataProps[]) => {
     setMenu(data);
   };
@@ -57,8 +49,16 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setIsModalDisplayed(!isModalDisplayed);
   };
 
+  const addItemToCart = (item: OrdersProps) => {
+    setOrders((prevState) => [...prevState, item]);
+  };
+
+  const removeItemFromCart = (id: string) => {
+    return id;
+  };
+
   // set the values as obj to be shared amoung the app components
-  const cartContext = {
+  const ordersContext = {
     menu: menu,
     orders: orders,
     subtotal: 0,
@@ -70,6 +70,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     modalDisplay: modalDisplay,
   };
   return (
-    <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>
+    <OrdersContext.Provider value={ordersContext}>
+      {children}
+    </OrdersContext.Provider>
   );
 };

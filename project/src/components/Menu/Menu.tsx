@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { CartContext } from "../../store/cartContext";
+import { OrdersContext } from "../../store/ordersContext";
 
 import { Section } from "../UI/Section";
 import { Button } from "../UI/Button";
-import { List } from "../List/List";
 import { CardItem } from "../Card/CardItem";
+import { List } from "../List/List";
 import { ListItem } from "../List/ListItem";
 
 import { generateRandomPrice } from "../../helpers/randomPrice";
@@ -19,10 +19,6 @@ export interface DataProps {
 interface DataPropsList {
   meals: DataProps[];
 }
-
-// interface MenuProps {
-//   onListItemClick: (value: OrdersProps) => void;
-// }
 
 const menuCategories = [
   {
@@ -44,7 +40,7 @@ const menuCategories = [
 ];
 
 export const Menu = () => {
-  const context = useContext(CartContext);
+  const context = useContext(OrdersContext);
   const { menu, loadMenu } = context;
 
   const handleMenuTab = (e: React.MouseEvent) => {

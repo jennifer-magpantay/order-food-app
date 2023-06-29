@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CartContext } from "./store/cartContext";
+import { OrdersContext } from "./store/ordersContext";
 
 import { Header } from "./components/UI/Header";
 import { Hero } from "./components/UI/Hero";
@@ -9,12 +9,20 @@ import { Footer } from "./components/UI/Footer";
 import { Modal } from "./components/UI/Modal";
 
 import { calculateTotalPriceByItemAmount } from "./helpers/totalAmount";
+import { Table } from "./components/Table/Table";
+import { TableBodyRow } from "./components/Table/TableBodyRow";
 
 /**
  * TODO:
  * - find a way to not fetch the menu all the time
  * - maybe save it into storage?
- * - set function to remoce item from list
+ * - set table component
+ * - add to modal list a delete icon from the orders list
+ * - also on modal, is a user set a item to 0, remove it from the orders list
+ * - if a user clicks twice or more on add button of the same item, increase its amount
+ * - add a animation to cart button
+ * - on orders list, add to each item a subtotal prop
+ * - set a function to calcutate the the total of the orders list, reducing the subtotal prop of orders list
  */
 
 export interface OrdersProps {
@@ -25,7 +33,7 @@ export interface OrdersProps {
 }
 
 export const App = () => {
-  const context = useContext(CartContext);
+  const context = useContext(OrdersContext);
   const { orders, isModalDisplayed } = context;
 
   return (
@@ -41,33 +49,16 @@ export const App = () => {
         {orders.length === 0 ? (
           <p>There are no orders to be displayed</p>
         ) : (
-          <>
-            <table>
-              <thead>
-                <tr>
-                  <th>Food</th>
-                  <th>Price</th>
-                  <th>Qt</th>
-                  <th>Subtotal</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((order) => (
-                  <tr key={order.name}>
-                    <td>{order.name}</td>
-                    <td>{order.price}</td>
-                    <td>{order.amount}</td>
-                    <td>
-                      {calculateTotalPriceByItemAmount(
-                        order.price,
-                        order.amount
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </>
+          <Table total="0.00">
+            {orders.map((order) => (
+              <TableBodyRow
+                key={order.name}
+                name={order.name}
+                price={order.price}
+                amount={order.amount}
+              />
+            ))}
+          </Table>
         )}
       </Modal>
     </>

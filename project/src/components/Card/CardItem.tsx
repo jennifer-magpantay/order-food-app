@@ -1,5 +1,5 @@
 import { useContext, useRef } from "react";
-import { CartContext } from "../../store/cartContext";
+import { OrdersContext } from "../../store/ordersContext";
 
 import { Form } from "../Form/Form";
 
@@ -10,7 +10,7 @@ interface CardItemProps {
 }
 
 export const CardItem = ({ id, description, price }: CardItemProps) => {
-  const context = useContext(CartContext);
+  const context = useContext(OrdersContext);
   const { menu, addItem } = context;
 
   const formRef = useRef<HTMLFormElement>(null);

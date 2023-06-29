@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { CartProvider } from "./store/cartContext";
+import { OrdersProvider } from "./store/ordersContext";
 import { App } from "./App";
 import "./styles/app.scss";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <CartProvider>
+    <OrdersProvider>
       <App />
-    </CartProvider>
+    </OrdersProvider>
   </React.StrictMode>
 );
