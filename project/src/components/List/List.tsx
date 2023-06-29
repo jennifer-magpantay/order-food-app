@@ -10,9 +10,13 @@ interface ListProps {
 
 export const List = ({ list, error, customClass, children }: ListProps) => {
   return (
-    <div className="list">
-      {!list && <p>{error}</p>}
-      {list && <ul className={customClass}>{children}</ul>}
-    </div>
+    <>
+      {list?.length !== 0 && (
+        <div className="list">
+          {!list && <p>{error}</p>}
+          {list && <ul className={customClass}>{children}</ul>}
+        </div>
+      )}
+    </>
   );
 };
