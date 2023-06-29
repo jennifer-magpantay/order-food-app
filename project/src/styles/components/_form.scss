@@ -9,19 +9,20 @@ form {
   align-items: center;
   justify-content: space-between;
   gap: gap(2);
+}
 
-  .amount--container {
-    display: flex;
-    align-items: center;
-    gap: gap(1);
+.counter--container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: gap(0.5);
 
-    input {
-      width: 5ch;
-      padding: gap(1) gap(2);
-      border: 01px solid $gray-100;
-      border-radius: 4px;
-      text-align: center;
-    }
+  input {
+    width: 5ch;
+    padding: gap(1) gap(2);
+    border: 01px solid $gray-100;
+    border-radius: 4px;
+    text-align: center;
   }
 }
 

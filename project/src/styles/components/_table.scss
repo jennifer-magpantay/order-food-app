@@ -19,6 +19,14 @@ table {
     letter-spacing: 1.2px;
   }
 
+  tfoot {
+    tr {
+      .bold.align-center {
+        display: block;
+      }
+    }
+  }
+
   th,
   td {
     padding: gap(1);
