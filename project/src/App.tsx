@@ -16,13 +16,10 @@ import { TableBodyRow } from "./components/Table/TableBodyRow";
  * TODO:
  * - find a way to not fetch the menu all the time
  * - maybe save it into storage?
- * - set table component
- * - add to modal list a delete icon from the orders list
- * - also on modal, is a user set a item to 0, remove it from the orders list
+ * - on modal, is a user set a item to 0, remove it from the orders list => BUG
+ * - modal Bug: input events not working
  * - if a user clicks twice or more on add button of the same item, increase its amount
  * - add a animation to cart button
- * - on orders list, add to each item a subtotal prop
- * - set a function to calcutate the the total of the orders list, reducing the subtotal prop of orders list
  */
 
 export const App = () => {
