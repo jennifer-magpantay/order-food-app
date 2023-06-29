@@ -8,17 +8,7 @@ import { List } from "../List/List";
 import { ListItem } from "../List/ListItem";
 
 import { generateRandomPrice } from "../../helpers/randomPrice";
-
-export interface DataProps {
-  strMeal: string;
-  strMealThumb?: string;
-  idMeal: string;
-  price: string;
-}
-
-interface DataPropsList {
-  meals: DataProps[];
-}
+import { DataPropsList, MenuProps } from "../../interface/interface";
 
 const menuCategories = [
   {
@@ -48,11 +38,6 @@ export const Menu = () => {
     fetchData(target.id);
   };
 
-  const sliceMenuList = (menu: DataProps[]) => {
-    const shuffled = [...menu].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 10);
-  };
-
   const fetchData = async (id: string) => {
     // https://www.themealdb.com/api.php
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${id}`;
@@ -61,15 +46,21 @@ export const Menu = () => {
     );
     const data = result.meals;
 
-    const resultWithPrice = data.map((meal) => {
+    const resultWithPrice: MenuProps[] = data.map((meal) => {
       const newList = {
-        idMeal: meal.idMeal,
-        strMeal: meal.strMeal,
-        strMealThumb: meal.strMealThumb,
+        id: meal.idMeal,
+        description: meal.strMeal,
         price: generateRandomPrice(1, 20),
+        amount: 1,
+        thumb: meal.strMealThumb,
       };
       return newList;
     });
+
+    const sliceMenuList = (list: MenuProps[]) => {
+      const shuffled = [...list].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, 10);
+    };
 
     if (resultWithPrice.length > 10) {
       const menuSliced = sliceMenuList(resultWithPrice);
@@ -106,15 +97,12 @@ export const Menu = () => {
 
         <List list={menu} customClass="list--menu">
           {menu?.map((item) => (
-            <ListItem
-              key={item.idMeal}
-              id={item.idMeal}
-              customClass="list--menu-item"
-            >
+            <ListItem key={item.id} id={item.id} customClass="list--menu-item">
               <CardItem
-                id={item.idMeal}
-                description={item.strMeal}
+                id={item.id}
+                description={item.description}
                 price={item.price}
+                amount={item.amount}
               />
             </ListItem>
           ))}

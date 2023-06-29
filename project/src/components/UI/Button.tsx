@@ -7,6 +7,7 @@ interface ButtonProps {
   customClasses?: string;
   icon?: React.ReactNode;
   dataCount?: number;
+  dataId?: string;
   onClick?: (e: React.MouseEvent) => void;
 }
 
@@ -17,6 +18,7 @@ export const Button = ({
   customClasses,
   icon,
   dataCount,
+  dataId,
   onClick,
 }: ButtonProps) => {
   const _customClasses = ["button", customClasses].join(" ");
@@ -55,6 +57,7 @@ export const Button = ({
           id={id}
           className={_customClasses}
           type={type}
+          data-id={dataId}
           onClick={onClick}
         >
           {customClasses && renderButtonContent(customClasses)}
