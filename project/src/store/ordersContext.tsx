@@ -62,32 +62,32 @@ export const OrdersProvider = ({ children }: OrdersProviderProps) => {
   };
 
   const manageItemAmount = (id: string, itemId: string) => {
-    const updatedMenu = menu.map((order) => {
-      if (order.id === itemId) {
+    const updatedMenu = menu.map((item) => {
+      if (item.id === itemId) {
         return {
-          ...order,
+          ...item,
           amount:
             id === "increase"
-              ? order.amount + 1
-              : order.amount === 0
+              ? item.amount + 1
+              : item.amount === 0
               ? 0
-              : order.amount - 1,
+              : item.amount - 1,
         };
       }
-      return order;
+      return item;
     });
     setMenu(updatedMenu);
   };
 
   const setAmount = (amount: number, itemId: string) => {
-    const updatedMenu = menu.map((order) => {
-      if (order.id === itemId) {
+    const updatedMenu = menu.map((item) => {
+      if (item.id === itemId) {
         return {
-          ...order,
+          ...item,
           amount: amount,
         };
       }
-      return order;
+      return item;
     });
     setMenu(updatedMenu);
   };

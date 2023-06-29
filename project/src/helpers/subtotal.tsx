@@ -1,4 +1,4 @@
-import { OrdersProps } from "../App";
+import { OrdersProps } from "../interface/interface";
 import { formatPrice } from "./randomPrice";
 
 export const calculateSubtotal = (orders: OrdersProps[]) => {

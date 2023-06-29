@@ -22,4 +22,5 @@ export interface OrdersProps {
   price: string;
   amount: number;
   thumb?: string;
+  subtotal: string;
 }
