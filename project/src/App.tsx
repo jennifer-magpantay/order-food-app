@@ -25,13 +25,6 @@ import { TableBodyRow } from "./components/Table/TableBodyRow";
  * - set a function to calcutate the the total of the orders list, reducing the subtotal prop of orders list
  */
 
-export interface OrdersProps {
-  id: string;
-  name: string;
-  price: string;
-  amount: number;
-}
-
 export const App = () => {
   const context = useContext(OrdersContext);
   const { orders, isModalDisplayed } = context;
@@ -49,13 +42,15 @@ export const App = () => {
         {orders.length === 0 ? (
           <p>There are no orders to be displayed</p>
         ) : (
-          <Table total="0.00">
+          <Table total={orders}>
             {orders.map((order) => (
               <TableBodyRow
-                key={order.name}
-                name={order.name}
+                key={order.id}
+                id={order.id}
+                name={order.description}
                 price={order.price}
                 amount={order.amount}
+                subtotal={order.subtotal}
               />
             ))}
           </Table>
