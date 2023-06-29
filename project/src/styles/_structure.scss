@@ -55,3 +55,13 @@ body {
   padding: 0;
   position: absolute;
 }
+
+.bold {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $gray-700;
+  font-weight: bold;
+  letter-spacing: 1.2px;
+}
