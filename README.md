@@ -8,7 +8,7 @@ An order food app where user could check a menu by category, add items to a cart
 
 ## Goals
 
-The main goals are practice concepts of state management, sharing data, context, dynamic display of UI based on states, reusability amoung components and functions.
+The main goals are practice concepts of state management, sharing data, context through useContext API from React, dynamic display of UI based on states, reusability amoung components and functions.
 
 ## Status
 
