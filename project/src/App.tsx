@@ -7,8 +7,6 @@ import { Main } from "./components/UI/Main";
 import { Menu } from "./components/Menu/Menu";
 import { Footer } from "./components/UI/Footer";
 import { Modal } from "./components/UI/Modal";
-
-import { calculateTotalPriceByItemAmount } from "./helpers/totalAmount";
 import { Table } from "./components/Table/Table";
 import { TableBodyRow } from "./components/Table/TableBodyRow";
 

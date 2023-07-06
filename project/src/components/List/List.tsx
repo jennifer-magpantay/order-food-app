@@ -1,5 +1,5 @@
 import React from "react";
-import { DataProps } from "../Menu/Menu";
+import { DataProps } from "../../interface/interface";
 
 interface ListProps {
   list: any[] | DataProps[] | undefined;
